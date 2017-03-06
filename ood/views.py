@@ -11,10 +11,6 @@ from django.views.generic.edit import ModelFormMixin
 from .forms import SatzForm
 from .models import OODBeispiel
 
-def decorator(func):
-
-    func.last = "foobar"
-    return func
 
 class CreateView(generic.CreateView):
     def get_initial(self):
@@ -37,10 +33,8 @@ class IndexView(generic.ListView):
     template_name = 'index.html'
     context_object_name = 'latest_ood_list'
 
-    @decorator
     def get_queryset(self):
         """Return the last five published questions."""
-        print (dir(OODBeispiel.objects.all()))
         return OODBeispiel.objects.all
 
 class DetailView(generic.DetailView):
