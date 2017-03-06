@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load staticfiles  %}
+
+<html>
+	<head>
+                <meta charset="utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>OOD</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.css" %}">
+		<script type="text/javascript" src="{% static "admin/js/jquery.min.js" %} "></script>
+		<script type="text/javascript" src="{% static "bootstrap/js/bootstrap.min.js" %} "></script>
+	</head>
+	<body>
+
+		<div class="container">
+			<div class="starter-template">
+				<div class="row">
+
+				<a href="/admin/"><h1>OOD</h1></a>
+
+
+					<div class="page-header">
+						<h1>OOD Beispiel Aufgabe</h1>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12">
+                          <div class="container">
+  {% if not user.is_authenticated %}
+  <p><a href="/admin/" class="btn btn-success" role="button">Admin Login</a></p>
+  {% endif %}
+<p>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="/add-satz/" method="get">
+    {% csrf_token %}
+    <label for="bspsatz">Satz eingeben</label>
+    <input type="text" name="bspsatz">
+    <input type="submit" value="Speichern" class="btn btn-default" />
+</form>
+
+</p>
+
+  <div class=table-responsive>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Satz</th>
+        <th></th>
+      </tr>
+    </thead>
+     <tbody>
+      {% for k in latest_ood_list %}
+      <tr>
+        <td><a href="/{{ k.bsp_id }}">Zeige diesen Satz</a></td>
+        <td>{{ k.beispielsatz }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+						</div><!-- /.col-sm-4 -->
+
+					</div>
+				</div>
+			</div>
+			<hr>
+		<footer class="footer">
+			<p>&copy; slavisa karalic 2017</p>
+		</footer>
+	</body>
+</html>
