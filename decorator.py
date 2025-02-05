@@ -41,7 +41,7 @@ nochmals dekoriert"""
 
 
 """ Bei dieser Schreibweise kann man noch gut sehen wie die verschachtelten
-Docorators functionieren, bzw in welcher Reihenfolge."""
+Docorators funktionieren, bzw in welcher Reihenfolge."""
 
 def dekorfunk2(func):
 	func.__doc__ += ' - Ich bin die Umliegende Dekoration'
