@@ -1,0 +1,28 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h1>E-Mail versenden</h1>
+  <p>Du bist dabei, den Status der folgenden Eintraege zu aendern:</p>
+  <ul>
+    {% for obj in queryset %}
+      <li>{{ obj }}</li>
+    {% endfor %}
+  </ul>
+  <form method="post">
+    {% csrf_token %}
+    <p>
+      <label for="id_email_body">E-Mail Inhalt:</label><br>
+      <textarea id="id_email_body" name="email_body" rows="10" cols="80">{{ email_body }}</textarea>
+    </p>
+    <input type="hidden" name="action" value="{{ action }}">
+    <input type="hidden" name="new_status" value="{{ new_status }}">
+    {% for obj in queryset %}
+      <input type="hidden" name="_selected_action" value="{{ obj.pk }}">
+    {% endfor %}
+    <p>
+      <input type="submit" name="confirm" value="Bestatigen und E-Mails versenden">
+      <a href="{% url 'admin:app_list' app_label %}">Abbrechen</a>
+    </p>
+  </form>
+{% endblock %}
